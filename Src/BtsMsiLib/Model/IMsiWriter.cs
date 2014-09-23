@@ -11,6 +11,6 @@ namespace BtsMsiLib.Model
         /// Needs to include a name parameter</param>
         /// <param name="resources">A list of resources that should be added to the Msi.</param>
         /// <returns></returns>
-        Stream Write(BtsApplication btsApplication, Resource[] resources);
+        FileStream Write(BtsApplication btsApplication, Resource[] resources);
     }
 }

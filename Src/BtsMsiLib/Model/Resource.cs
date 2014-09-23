@@ -11,15 +11,16 @@ namespace BtsMsiLib.Model
     {
         public string FilePath { get; set; }
         public string FullName { get; private set; }
-        public ResourceType Type { get; set; }
-        public string ShortCabinetName { get; set; }
+        public ResourceType Type { get; private set; }
+        public string ShortCabinetName { get; internal set; }
         public string SourceLocation { get; set; }
 
-        public Resource(string filePath)
+        public Resource(string filePath, ResourceType type)
         {
             FilePath = filePath;
-            var assembly = Assembly.LoadFrom(filePath);
+            Type = type;
 
+            var assembly = Assembly.LoadFrom(filePath);
             FullName = assembly.GetName().FullName;
         }
 

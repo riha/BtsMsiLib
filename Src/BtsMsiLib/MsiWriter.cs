@@ -10,7 +10,7 @@ namespace BtsMsiLib
 {
     public class MsiWriter : IMsiWriter
     {
-        public Stream Write(BtsApplication btsApplication, Resource[] resources)
+        public FileStream Write(BtsApplication btsApplication, Resource[] resources)
         {
             BtsApplicationValidator.Validate(btsApplication);
 
@@ -40,7 +40,7 @@ namespace BtsMsiLib
                 db.Commit();
             }
 
-            return File.Open(destinationFilePath, FileMode.Open);
+            return File.OpenRead(destinationFilePath);
         }
     }
 }
