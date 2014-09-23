@@ -43,6 +43,4 @@ namespace BtsMsiLib
             return File.Open(destinationFilePath, FileMode.Open);
         }
     }
-
-
 }

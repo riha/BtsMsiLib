@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using BtsMsiLib.Model;
 using Microsoft.Deployment.Compression.Cab;
