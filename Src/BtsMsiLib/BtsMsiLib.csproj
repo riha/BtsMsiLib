@@ -51,6 +51,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationDefinitionFile\AdfFileWriter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ApplicationDefinitionFile\FileNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ApplicationDefinitionFile\PropertyNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ApplicationDefinitionFile\ReferenceNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ApplicationDefinitionFile\ResourceNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="BtsApplicationValidator.cs" />
     <Compile Include="Cab\CabFileWriter.cs">
       <SubType>Code</SubType>

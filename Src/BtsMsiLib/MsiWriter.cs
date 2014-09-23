@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using BtsMsiLib.ApplicationDefinitionFile;
 using BtsMsiLib.Cab;
 using BtsMsiLib.Model;
 
@@ -16,6 +17,10 @@ namespace BtsMsiLib
 
             var cabFileWriter = new CabFileWriter();
             var cabFolderPath = cabFileWriter.Write(resources);
+
+            var adfFileWriter = new AdfFileWriter();
+            var adfFilePath = adfFileWriter.Write(btsApplication, resources);
+
 
             return null;
         }
