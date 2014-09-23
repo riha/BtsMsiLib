@@ -82,6 +82,12 @@
     <Compile Include="Model\ResourceType.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Msi\MsiDatabaseExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Msi\MsiFileWriter.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ResourceValidator.cs" />
     <Compile Include="MsiWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -91,6 +97,9 @@
     <Compile Include="Utilities\HashHelper.cs">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Msi\BT2013\ApplicationTemplate.msi" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
