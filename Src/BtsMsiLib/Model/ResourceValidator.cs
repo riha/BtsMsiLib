@@ -1,9 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using BtsMsiLib.Model;
 
-namespace BtsMsiLib
+namespace BtsMsiLib.Model
 {
     public class ResourceValidator
     {

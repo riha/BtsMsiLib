@@ -1,7 +1,6 @@
 ﻿using System;
-using BtsMsiLib.Model;
 
-namespace BtsMsiLib
+namespace BtsMsiLib.Model
 {
     public class BtsApplicationValidator
     {
