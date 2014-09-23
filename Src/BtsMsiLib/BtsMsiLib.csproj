@@ -52,6 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BtsApplicationValidator.cs" />
+    <Compile Include="Cab\CabFileWriter.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Model\BtsApplication.cs">
       <SubType>Code</SubType>
     </Compile>
