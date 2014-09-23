@@ -24,13 +24,12 @@ namespace BtsMsiLib
             var adfFileWriter = new AdfFileWriter();
             var adfFilePath = adfFileWriter.Write(btsApplication, resources);
 
-            var destinationFilePath = Path.GetTempPath();
-            MsiFileWriter.Write(destinationFilePath);
+            var msiFilePath = MsiFileWriter.Write();
 
             var productCode = Guid.NewGuid();
             var upgradeCode = Guid.NewGuid();
             var properties = MsiFileWriter.GetProperties(btsApplication.Name, productCode, upgradeCode);
-            using (var db = new Database(destinationFilePath, DatabaseOpenMode.Direct))
+            using (var db = new Database(msiFilePath, DatabaseOpenMode.Direct))
             {
                 db.UpdateSummaryInfo();
                 db.UpdateUpgradeTable(upgradeCode);
@@ -40,7 +39,7 @@ namespace BtsMsiLib
                 db.Commit();
             }
 
-            return File.OpenRead(destinationFilePath);
+            return File.OpenRead(msiFilePath);
         }
     }
 }

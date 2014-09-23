@@ -7,8 +7,11 @@ namespace BtsMsiLib.Msi
 {
     public class MsiFileWriter
     {
-        public static void Write(string destinationPath)
+        public static string Write()
         {
+            var destinationPath = Path.GetTempPath();
+            var destinationFilePath = Path.Combine(destinationPath, Path.GetTempFileName());
+
             if (!Directory.Exists(destinationPath))
                 Directory.CreateDirectory(destinationPath);
 
@@ -25,12 +28,14 @@ namespace BtsMsiLib.Msi
                     throw new ApplicationException(string.Format("Could not create MSI template from {0} and resource path {1}", msiName, resourcePath));
             
                 using (var reader = new BinaryReader(stream))
-                using (var output = new FileStream(destinationPath, FileMode.Create, FileAccess.Write))
+                using (var output = new FileStream(destinationFilePath, FileMode.Create, FileAccess.Write))
                 {
                     while (reader.BaseStream.Position != reader.BaseStream.Length)
                         output.WriteByte(reader.ReadByte());
                 }
             }
+
+            return destinationFilePath;
         }
 
         public static IDictionary<string, object> GetProperties(string productName, Guid productCode, Guid upgradeCode)
