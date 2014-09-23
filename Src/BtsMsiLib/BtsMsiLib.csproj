@@ -99,7 +99,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Msi\BT2013\ApplicationTemplate.msi" />
+    <EmbeddedResource Include="Msi\BT2013\ApplicationTemplate.msi" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
