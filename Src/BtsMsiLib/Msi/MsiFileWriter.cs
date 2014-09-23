@@ -9,6 +9,9 @@ namespace BtsMsiLib.Msi
     {
         public static void Write(string destinationPath)
         {
+            if (!Directory.Exists(destinationPath))
+                Directory.CreateDirectory(destinationPath);
+
             // TODO: Needs to be dynamic when supporting multiple BizTalk versions
             const string btVersionFolderName = "Msi.BT2013";
             var asssembly = Assembly.GetExecutingAssembly();
