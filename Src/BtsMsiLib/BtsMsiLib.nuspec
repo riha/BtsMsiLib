@@ -2,11 +2,14 @@
 <package >
   <metadata>
     <id>BtsMsiLib</id>
-    <version>1.0.0-beta</version>
+    <version>1.0.1-beta</version>
     <title>BtsMsiLib</title>
     <authors>Richard Hallgren</authors>
     <projectUrl>https://github.com/riha/BtsMsiLib</projectUrl>
     <description>Library for packaging resources in a BizTalk MSI</description>
     <tags>BizTalk</tags>
   </metadata>
+  <files>
+    <file src="..\..\Dependencies\*.dll" target="lib\net20" />
+  </files>
 </package>
