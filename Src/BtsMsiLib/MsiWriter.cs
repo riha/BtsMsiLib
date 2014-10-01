@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using BtsMsiLib.ApplicationDefinitionFile;
 using BtsMsiLib.Cab;
 using BtsMsiLib.Model;
@@ -13,11 +14,12 @@ namespace BtsMsiLib
         public FileStream Write(BtsApplication btsApplication, Resource[] resources)
         {
             BtsApplicationValidator.Validate(btsApplication);
-
             ResourceValidator.Validate(resources);
 
             var cabFileWriter = new CabFileWriter();
             var cabFolderPath = cabFileWriter.Write(resources);
+
+            btsApplication.AddDefaultApplicationReference();
 
             var adfFileWriter = new AdfFileWriter();
             var adfFilePath = adfFileWriter.Write(btsApplication, resources);

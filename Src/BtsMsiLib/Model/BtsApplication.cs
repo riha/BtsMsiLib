@@ -1,4 +1,6 @@
-﻿namespace BtsMsiLib.Model
+﻿using System.Linq;
+
+namespace BtsMsiLib.Model
 {
     public class BtsApplication
     {
@@ -9,6 +11,19 @@
         public BtsApplication(string name)
         {
             Name = name;
+        }
+
+        internal void AddDefaultApplicationReference()
+        {
+            if (ReferencedApplications == null)
+            {
+                ReferencedApplications = new[] {"BizTalk.System"};
+            }
+            else
+            {
+                if (!ReferencedApplications.Contains("BizTalk.System"))
+                    ReferencedApplications.ToList().Add("BizTalk.System");
+            }
         }
     }
 }
