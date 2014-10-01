@@ -16,8 +16,6 @@ namespace BtsMsiLib
 
             ResourceValidator.Validate(resources);
 
-            // TODO: Add handling of the referenced BT applications
-
             var cabFileWriter = new CabFileWriter();
             var cabFolderPath = cabFileWriter.Write(resources);
 

@@ -6,11 +6,6 @@ namespace BtsMsiLib.Utilities
 {
     public static class FileHelper
     {
-        //public static string GetMsiFileName(string applicationName, string fileName)
-        //{
-        //    return !string.IsNullOrEmpty(fileName) ? fileName : string.Concat(applicationName, DateTime.Now.ToString("-yyyyMMddHHmmss"), ".msi");
-        //}
-
         public static string GetValidFilename(string filename)
         {
             var list = new List<char>();
