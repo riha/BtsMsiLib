@@ -17,7 +17,7 @@ namespace BtsMsiLib.IntegrationTests
             var msiWriter = new MsiWriter();
             var file = msiWriter.Write(btsApplication, new[] { btsSchemaResource });
 
-            using (var destinationFile = File.Create("MinimalisticBtsResourceTest.msi"))
+            using (var destinationFile = File.Create(@"..\..\..\Export\MinimalisticBtsResourceTest.msi"))
             {
                 file.CopyTo(destinationFile);
             }
@@ -32,7 +32,7 @@ namespace BtsMsiLib.IntegrationTests
             var msiWriter = new MsiWriter();
             var file = msiWriter.Write(btsApplication, new[] { btsSchemaResource });
 
-            using (var destinationFile = File.Create("MinimalisticResourceTest.msi"))
+            using (var destinationFile = File.Create(@"..\..\..\Export\MinimalisticResourceTest.msi"))
             {
                 file.CopyTo(destinationFile);
             }
@@ -48,7 +48,53 @@ namespace BtsMsiLib.IntegrationTests
             var msiWriter = new MsiWriter();
             var file = msiWriter.Write(btsApplication, new[] { btsSchemaResource, resource });
 
-            using (var destinationFile = File.Create("MinimalisticMixedResourceTest.msi"))
+            using (var destinationFile = File.Create(@"..\..\..\Export\MinimalisticMixedResourceTest.msi"))
+            {
+                file.CopyTo(destinationFile);
+            }
+        }
+
+        [TestMethod]
+        public void DescriptionTest()
+        {
+            var btsApplication = new BtsApplication("App1") { Description = "Test desc" };
+            var btsSchemaResource = new Resource(@"..\..\..\Data\BtsSample.Schemas.dll", ResourceType.BtsResource);
+
+            var msiWriter = new MsiWriter();
+            var file = msiWriter.Write(btsApplication, new[] { btsSchemaResource });
+
+            using (var destinationFile = File.Create(@"..\..\..\Export\DescriptionTest.msi"))
+            {
+                file.CopyTo(destinationFile);
+            }
+        }
+
+        [TestMethod]
+        public void BtsApplicationReferenceTest()
+        {
+            var btsApplication = new BtsApplication("App1") { ReferencedApplications = new[] { "App2, App3" } };
+            var btsSchemaResource = new Resource(@"..\..\..\Data\BtsSample.Schemas.dll", ResourceType.BtsResource);
+
+            var msiWriter = new MsiWriter();
+            var file = msiWriter.Write(btsApplication, new[] { btsSchemaResource });
+
+            using (var destinationFile = File.Create(@"..\..\..\Export\BtsApplicationReferenceTest.msi"))
+            {
+                file.CopyTo(destinationFile);
+            }
+        }
+
+        [TestMethod]
+        public void SourceLocationTest()
+        {
+            var btsApplication = new BtsApplication("App1");
+            var btsSchemaResource = new Resource(@"..\..\..\Data\BtsSample.Schemas.dll", ResourceType.BtsResource) { SourceLocation = @"c:\test1" };
+            var resource = new Resource(@"..\..\..\Data\BtsSample.Utilities.dll", ResourceType.Resource) { SourceLocation = @"c:\test2" };
+
+            var msiWriter = new MsiWriter();
+            var file = msiWriter.Write(btsApplication, new[] { btsSchemaResource, resource });
+
+            using (var destinationFile = File.Create(@"..\..\..\Export\SourceLocationTest.msi"))
             {
                 file.CopyTo(destinationFile);
             }
