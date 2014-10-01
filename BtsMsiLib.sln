@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BtsMsiLib", "Src\BtsMsiLib\BtsMsiLib.csproj", "{A8C028C9-7752-44BF-83EE-86D20217509C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BtsMsiLib.IntegrationTests", "Tests\BtsMsiLib.IntegrationTests\BtsMsiLib.IntegrationTests.csproj", "{0A62AC77-A68A-4C7A-A082-0D3AB2A50E76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{A8C028C9-7752-44BF-83EE-86D20217509C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8C028C9-7752-44BF-83EE-86D20217509C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8C028C9-7752-44BF-83EE-86D20217509C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A62AC77-A68A-4C7A-A082-0D3AB2A50E76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A62AC77-A68A-4C7A-A082-0D3AB2A50E76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A62AC77-A68A-4C7A-A082-0D3AB2A50E76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A62AC77-A68A-4C7A-A082-0D3AB2A50E76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
