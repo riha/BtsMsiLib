@@ -1,7 +1,7 @@
 Library to create and pack resources in to BizTalk Server specific MSI files.
 
 ## Get started ##
-Use NuGet to download the BtsMsiLib [todo: add link] package.
+Use NuGet to download the [BtsMsiLib package](https://www.nuget.org/packages/BtsMsiLib/).
  
 	// Create a BizTalk application object with specific name
 	var btsApplication = new BtsApplication("App1");
@@ -18,6 +18,3 @@ Use NuGet to download the BtsMsiLib [todo: add link] package.
 	{
 		file.CopyTo(destinationFile);
 	}
-
-## Additional parameters ##
-TODO
