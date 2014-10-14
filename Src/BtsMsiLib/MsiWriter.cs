@@ -39,6 +39,9 @@ namespace BtsMsiLib
                 db.Commit();
             }
 
+            File.Delete(adfFilePath);
+            Directory.Delete(cabFolderPath, true);
+
             return File.OpenRead(msiFilePath);
         }
     }
