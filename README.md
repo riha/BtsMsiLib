@@ -18,3 +18,5 @@ Use NuGet to download the [BtsMsiLib package](https://www.nuget.org/packages/Bts
 	{
 		file.CopyTo(destinationFile);
 	}
+
+[![Build status](https://ci.appveyor.com/api/projects/status/k6rvsfp17a4mmrks?svg=true)](https://ci.appveyor.com/project/riha/btsmsilib-719)
