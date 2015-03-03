@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<xs:schema xmlns="http://BtsSample.Schemas.SchemaB" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" targetNamespace="http://BtsSample.Schemas.SchemaB" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="SchemaBRoot">
+    <xs:complexType />
+  </xs:element>
+</xs:schema>
