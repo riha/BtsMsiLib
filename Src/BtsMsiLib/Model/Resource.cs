@@ -7,22 +7,14 @@ using BtsMsiLib.Utilities;
 
 namespace BtsMsiLib.Model
 {
-    public class Resource
+    public abstract class Resource
     {
-        public string FilePath { get; set; }
-        public string FullName { get; private set; }
-        public ResourceType Type { get; private set; }
         public string ShortCabinetName { get; internal set; }
         public string SourceLocation { get; set; }
 
-        public Resource(string filePath, ResourceType type)
-        {
-            FilePath = filePath;
-            Type = type;
-
-            var assembly = Assembly.LoadFrom(filePath);
-            FullName = assembly.GetName().FullName;
-        }
+        public abstract string TypeName { get; }
+        public abstract string Luid { get; }
+        public abstract string Path { get; set; }
 
         internal static string GetLuidHash(string luid)
         {
@@ -31,44 +23,26 @@ namespace BtsMsiLib.Model
             var stringBuilder = new StringBuilder();
 
             foreach (byte num in publicKeyToken)
+            {
                 stringBuilder.Append(num.ToString("x2", CultureInfo.InvariantCulture));
+            }
 
             string hash = Hasher.HashAssemblyFullyQualifiedName(assemblyName.Name, assemblyName.Version + "-" + stringBuilder).ToString("N");
 
             return hash;
         }
 
-
-        public static string GetTypeName(ResourceType type)
+        internal string GetResourceTypeFolder(string applicationFolder)
         {
-            switch (type)
-            {
-                case ResourceType.BtsResource:
-                    return "System.BizTalk:BizTalkAssembly";
-                case ResourceType.Resource:
-                    return "System.BizTalk:Assembly";
-            }
-
-            throw new NotImplementedException("Unsupported resource type. Currently only BizTalkAssemblies and Assemblies are supported.");
-        }
-
-        internal string GetResourceFolder(string applicationFolder)
-        {
-            var name = GetTypeName(Type);
-
-            string resourceType = name.Substring(name.IndexOf(':') + 1);
-            string resourceTypeFolder = GetResourceTypeFolder(applicationFolder, resourceType);
-            string filename = GetLuidHash(FullName);
-            string luidFilename = FileHelper.GetLuidFilename(filename);
-
-            return Path.Combine(resourceTypeFolder, luidFilename);
-        }
-
-        internal string GetResourceTypeFolder(string applicationFolder, string resourceType)
-        {
+            string resourceType = TypeName.Substring(TypeName.IndexOf(':') + 1);
             string validFilename = FileHelper.GetValidFilename(resourceType.Substring(resourceType.IndexOf(':') + 1));
 
-            return Path.Combine(applicationFolder, validFilename);
+            var resourceTypeFolder = System.IO.Path.Combine(applicationFolder, validFilename);
+
+            return resourceTypeFolder;
         }
+
+        internal abstract void CopyFilesTo(string folder);
+        internal abstract string GetResourceFolder(string applicationFolder);
     }
 }

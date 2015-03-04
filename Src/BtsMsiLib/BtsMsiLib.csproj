@@ -66,6 +66,7 @@
     <Compile Include="ApplicationDefinitionFile\ResourceNode.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\AssemblyResource.cs" />
     <Compile Include="Model\BtsApplicationValidator.cs" />
     <Compile Include="Cab\CabFileWriter.cs">
       <SubType>Code</SubType>
@@ -73,15 +74,14 @@
     <Compile Include="Model\BtsApplication.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\BtsAssemblyResource.cs" />
     <Compile Include="Model\IMsiWriter.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Resource.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\ResourceType.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Model\WebDirectoryResource.cs" />
     <Compile Include="Msi\MsiDatabaseExtensions.cs">
       <SubType>Code</SubType>
     </Compile>

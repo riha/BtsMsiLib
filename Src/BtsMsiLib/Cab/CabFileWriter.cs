@@ -8,7 +8,8 @@ namespace BtsMsiLib.Cab
     internal class CabFileWriter
     {
         /// <summary>
-        /// Copy each resource from its destination to a temp Cab folder. Each resource then is packed into a separate Cab-file.
+        /// Copy each resource from its destination to a temp Cab folder. 
+        /// Each resource then is packed into a separate Cab-file.
         /// </summary>
         /// <param name="resources"></param>
         /// <returns></returns>
@@ -30,7 +31,9 @@ namespace BtsMsiLib.Cab
                     Directory.CreateDirectory(resourceFolder);
 
                 // We have checked resource.FilePath for possible null values as we received the input parameters
-                File.Copy(resource.FilePath, Path.Combine(resourceFolder, Path.GetFileName(resource.FilePath)));
+                // Här skall vi hantera dem lite olika ... Kanske man kan ha en file path med det får vara foldern i vårt fall ...
+                resource.CopyFilesTo(resourceFolder);
+                //File.Copy(resource.Path, Path.Combine(resourceFolder, Path.GetFileName(resource.Path)));
 
                 var cabFileName = string.Format("ITEM~{0}.cab", index);
 

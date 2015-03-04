@@ -80,23 +80,31 @@ namespace BtsMsiLib.ApplicationDefinitionFile
                 var fileNodes = new List<FileNode>();
                 var dateText = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ssZ");
 
-                var location = string.IsNullOrEmpty(resource.SourceLocation) ? resource.FilePath : resource.SourceLocation;
+                var location = string.IsNullOrEmpty(resource.SourceLocation) ? resource.Path : resource.SourceLocation;
 
-                if (resource.Type == ResourceType.BtsResource)
+                if (resource is BtsAssemblyResource)
                 {
-                    SetBtsAssemblyResourceNodes(propertyNodes, resource, location, dateText,
+                    SetBtsAssemblyResourceNodes(propertyNodes, resource as BtsAssemblyResource, location, dateText,
                         fileNodes);
+                }
+                else if (resource is AssemblyResource)
+                {
+                    SetAssemblyResourceNodes(propertyNodes, resource as AssemblyResource, location, dateText,
+                        fileNodes);
+                }
+                else if (resource is WebDirectoryResource)
+                {
+                    SetWebDirectoryResourceNodes(propertyNodes, resource as WebDirectoryResource, location);
                 }
                 else
                 {
-                    SetAssemblyResourceNodes(propertyNodes, resource, location, dateText,
-                        fileNodes);
+                    throw new NotSupportedException("Only Bts, non bts assebmly resources and web directory are currently supported");
                 }
 
                 resourceNodes.Add(new ResourceNode
                 {
-                    Luid = resource.FullName,
-                    Type = Resource.GetTypeName(resource.Type),
+                    Luid = resource.Luid,
+                    Type = resource.TypeName,
                     Properties = propertyNodes,
                     Files = fileNodes
                 });
@@ -105,7 +113,7 @@ namespace BtsMsiLib.ApplicationDefinitionFile
             return resourceNodes;
         }
 
-        private static void SetBtsAssemblyResourceNodes(List<PropertyNode> propertyNodes, Resource resource, string location,
+        private static void SetBtsAssemblyResourceNodes(List<PropertyNode> propertyNodes, BtsAssemblyResource resource, string location,
             string dateText, List<FileNode> fileNodes)
         {
             propertyNodes.Add(new PropertyNode { Name = "BackgroundWorker", Value = "System.ComponentModel.BackgroundWorker" });
@@ -116,21 +124,21 @@ namespace BtsMsiLib.ApplicationDefinitionFile
             propertyNodes.Add(new PropertyNode { Name = "Fullname", Value = resource.FullName });
             propertyNodes.Add(new PropertyNode { Name = "UpdateOrchestrationStatus", Value = "True" });
             propertyNodes.Add(new PropertyNode { Name = "RestartHostInstances", Value = "False" });
-            propertyNodes.Add(new PropertyNode { Name = "SourceLocation", Value = Path.Combine(location, Path.GetFileName(resource.FilePath)) });
+            propertyNodes.Add(new PropertyNode { Name = "SourceLocation", Value = Path.Combine(location, Path.GetFileName(resource.Path)) });
             propertyNodes.Add(new PropertyNode
             {
                 Name = "DestinationLocation",
-                Value = string.Concat(@"%BTAD_InstallDir%\", Path.GetFileName(resource.FilePath))
+                Value = string.Concat(@"%BTAD_InstallDir%\", Path.GetFileName(resource.Path))
             });
             propertyNodes.Add(new PropertyNode { Name = "CreationTime", Value = dateText });
             propertyNodes.Add(new PropertyNode { Name = "LastAccessTime", Value = dateText });
             propertyNodes.Add(new PropertyNode { Name = "LastWriteTime", Value = dateText });
             propertyNodes.Add(new PropertyNode { Name = "ShortCabinetName", Value = resource.ShortCabinetName });
 
-            fileNodes.Add(new FileNode { Key = "Assembly", RelativePath = Path.GetFileName(resource.FilePath) });
+            fileNodes.Add(new FileNode { Key = "Assembly", RelativePath = Path.GetFileName(resource.Path) });
         }
 
-        private static void SetAssemblyResourceNodes(List<PropertyNode> propertyNodes, Resource resource, string location,
+        private static void SetAssemblyResourceNodes(List<PropertyNode> propertyNodes, AssemblyResource resource, string location,
            string dateText, List<FileNode> fileNodes)
         {
             propertyNodes.Add(new PropertyNode { Name = "Gacutil", Value = "True" });
@@ -138,11 +146,11 @@ namespace BtsMsiLib.ApplicationDefinitionFile
             propertyNodes.Add(new PropertyNode { Name = "UpdateGacOnImport", Value = "True" });
             propertyNodes.Add(new PropertyNode { Name = "Regasm", Value = "True" });
             propertyNodes.Add(new PropertyNode { Name = "Regsvcs", Value = "True" });
-            propertyNodes.Add(new PropertyNode { Name = "SourceLocation", Value = Path.Combine(location, Path.GetFileName(resource.FilePath)) });
+            propertyNodes.Add(new PropertyNode { Name = "SourceLocation", Value = Path.Combine(location, Path.GetFileName(resource.Path)) });
             propertyNodes.Add(new PropertyNode
             {
                 Name = "DestinationLocation",
-                Value = string.Concat(@"%BTAD_InstallDir%\", Path.GetFileName(resource.FilePath))
+                Value = string.Concat(@"%BTAD_InstallDir%\", Path.GetFileName(resource.Path))
             });
             propertyNodes.Add(new PropertyNode { Name = "Attributes", Value = "Archive" });
 
@@ -151,7 +159,31 @@ namespace BtsMsiLib.ApplicationDefinitionFile
             propertyNodes.Add(new PropertyNode { Name = "LastWriteTime", Value = dateText });
             propertyNodes.Add(new PropertyNode { Name = "ShortCabinetName", Value = resource.ShortCabinetName });
 
-            fileNodes.Add(new FileNode { Key = "File", RelativePath = Path.GetFileName(resource.FilePath) });
+            fileNodes.Add(new FileNode { Key = "File", RelativePath = Path.GetFileName(resource.Path) });
+        }
+
+        private static void SetWebDirectoryResourceNodes(List<PropertyNode> propertyNodes, WebDirectoryResource resource, string location)
+        {
+            // TODO: vad skall det egentligen stå här?
+
+            //propertyNodes.Add(new PropertyNode { Name = "SourceLocation", Value = Path.Combine(location, Path.GetFileName(resource.FilePath)) });
+            //propertyNodes.Add(new PropertyNode
+            //{
+            //    Name = "DestinationLocation",
+            //    Value = string.Concat(@"%BTAD_InstallDir%\", Path.GetFileName(resource.FilePath))
+            //});
+
+            // TODO: these hard codings need to be fixed
+            propertyNodes.Add(new PropertyNode { Name = "ShortCabinetName", Value = resource.ShortCabinetName });
+            propertyNodes.Add(new PropertyNode { Name = "PhysicalPath", Value = @"C:\inetpub\wwwroot\BizTalkWcfService" });
+            propertyNodes.Add(new PropertyNode { Name = "AspNetVersion", Value = "4.0.30319.33440" });
+            propertyNodes.Add(new PropertyNode { Name = "IISProcessMode", Value = "IISMode_64Bit" });
+
+            foreach (var file in resource.FilePaths)
+            {
+                fileNodes.Add(new FileNode { Key = "File", RelativePath = Path.GetFileName(file) });    
+            }
+            
         }
 
         private IEnumerable<PropertyNode> GetPropertyNodes(string displayName, string description, string version)

@@ -13,8 +13,9 @@ namespace BtsMsiLib
     {
         public FileStream Write(BtsApplication btsApplication, Resource[] resources)
         {
-            BtsApplicationValidator.Validate(btsApplication);
-            ResourceValidator.Validate(resources);
+            //TODO: Dessa skall flyttas in i respektive klass!!!
+            //BtsApplicationValidator.Validate(btsApplication);
+            //AssemblyResourceValidator.Validate(resources);
 
             var cabFileWriter = new CabFileWriter();
             var cabFolderPath = cabFileWriter.Write(resources);
