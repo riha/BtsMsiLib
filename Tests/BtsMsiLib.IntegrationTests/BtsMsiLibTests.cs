@@ -99,5 +99,21 @@ namespace BtsMsiLib.IntegrationTests
                 file.CopyTo(destinationFile);
             }
         }
+
+        [TestMethod]
+        public void FileTest()
+        {
+            var btsApplication = new BtsApplication("App1");
+            var btsSchemaResource = new Resource(@"..\..\..\Data\BtsSample.Schemas.dll", ResourceType.BtsResource) { SourceLocation = @"c:\test1" };
+            var fileResource = new Resource(@"..\..\..\Data\BtsSample.FileToAdd1.txt", ResourceType.File) { SourceLocation = @"c:\test2" };
+
+            var msiWriter = new MsiWriter();
+            var file = msiWriter.Write(btsApplication, new[] { btsSchemaResource, fileResource });
+
+            using (var destinationFile = File.Create(@"..\..\..\Export\FileTest.msi"))
+            {
+                file.CopyTo(destinationFile);
+            }
+        }
     }
 }
