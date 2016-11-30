@@ -2,6 +2,6 @@
 {
     public enum ResourceType
     {
-        BtsResource, Resource, Binding, ServiceDescription        
+        BtsResource, Resource, Binding, ServiceDescription, File        
     }
 }

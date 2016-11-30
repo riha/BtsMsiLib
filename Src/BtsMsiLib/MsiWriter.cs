@@ -24,14 +24,14 @@ namespace BtsMsiLib
             var adfFileWriter = new AdfFileWriter();
             var adfFilePath = adfFileWriter.Write(btsApplication, resources);
 
-            var msiFilePath = MsiFileWriter.Write();
+            var msiFilePath = MsiFileWriter.Write(btsApplication.MsiVersion);
 
             var productCode = Guid.NewGuid();
             var upgradeCode = Guid.NewGuid();
-            var properties = MsiFileWriter.GetProperties(btsApplication.Name, productCode, upgradeCode);
+            var properties = MsiFileWriter.GetProperties(btsApplication.Name, productCode, upgradeCode, btsApplication.ProductVersion,btsApplication.Manufacturer);
             using (var db = new Database(msiFilePath, DatabaseOpenMode.Direct))
             {
-                db.UpdateSummaryInfo();
+                db.UpdateSummaryInfo(btsApplication);
                 db.UpdateUpgradeTable(upgradeCode);
                 db.UpdateProperties(properties);
                 db.UpdateFileContent(cabFolderPath, adfFilePath, resources.Length);
