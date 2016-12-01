@@ -37,6 +37,21 @@ namespace BtsMsiLib.IntegrationTests
                 file.CopyTo(destinationFile);
             }
         }
+        [TestMethod]
+        public void MinimalisticBindingsTest()
+        {
+            var btsApplication = new BtsApplication("App1");
+            var btsSchemaResource = new Resource(@"..\..\..\Data\BtsSample.Schemas.dll", ResourceType.BtsResource) { SourceLocation = @"c:\test1" };
+            var btsBindingsResource = new Resource(@"..\..\..\Data\BtsSample.Dev.BindingInfo.xml", ResourceType.Binding) { SourceLocation = @"c:\test1" }; ;
+
+            var msiWriter = new MsiWriter();
+            var file = msiWriter.Write(btsApplication, new[] { btsSchemaResource, btsBindingsResource });
+
+            using (var destinationFile = File.Create(@"..\..\..\Export\MinimalisticBindingsTest.msi"))
+            {
+                file.CopyTo(destinationFile);
+            }
+        }
 
         [TestMethod]
         public void MinimalisticMixedResourceTest()
