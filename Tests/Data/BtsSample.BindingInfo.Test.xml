@@ -12,7 +12,7 @@
       <Description xsi:nil="true" />
       <TransmitPipeline Name="Microsoft.BizTalk.DefaultPipelines.PassThruTransmit" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines.PassThruTransmit, Microsoft.BizTalk.DefaultPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="2" TrackingOption="None" Description="" />
       <PrimaryTransport>
-        <Address>C:\BizTalk-Ports\BtsSample\Dev\Out\%MessageID%.%SourceFileName%</Address>
+        <Address>C:\BizTalk-Ports\BtsSample\Test\Out\%MessageID%.%SourceFileName%</Address>
         <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
         <TransportTypeData>&lt;CustomProps&gt;&lt;UseTempFileOnWrite vt="11"&gt;0&lt;/UseTempFileOnWrite&gt;&lt;AllowCacheOnWrite vt="11"&gt;-1&lt;/AllowCacheOnWrite&gt;&lt;CopyMode vt="19"&gt;1&lt;/CopyMode&gt;&lt;FileName vt="8"&gt;%MessageID%.%SourceFileName%&lt;/FileName&gt;&lt;/CustomProps&gt;</TransportTypeData>
         <RetryCount>3</RetryCount>
@@ -23,7 +23,7 @@
         <Primary>true</Primary>
         <OrderedDelivery>false</OrderedDelivery>
         <DeliveryNotification>1</DeliveryNotification>
-        <SendHandler Name="SendHost" HostTrusted="false">
+        <SendHandler Name="BizTalkServerApplication" HostTrusted="false">
           <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
         </SendHandler>
       </PrimaryTransport>
@@ -62,7 +62,7 @@
       <ReceiveLocations>
         <ReceiveLocation Name="RcvSample_FILE">
           <Description xsi:nil="true" />
-          <Address>C:\BizTalk-Ports\BtsSample\Dev\In\*.*</Address>
+          <Address>C:\BizTalk-Ports\BtsSample\Test\In\*.*</Address>
           <PublicAddress />
           <Primary>true</Primary>
           <ReceiveLocationServiceWindowEnabled>false</ReceiveLocationServiceWindowEnabled>

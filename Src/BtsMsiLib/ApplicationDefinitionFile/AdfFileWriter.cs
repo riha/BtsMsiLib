@@ -92,6 +92,10 @@ namespace BtsMsiLib.ApplicationDefinitionFile
                         SetAssemblyResourceNodes(propertyNodes, resource, location, dateText,
                         fileNodes);
                         break;
+                    case ResourceType.Binding:
+                        SetBindingResourceNodes(propertyNodes, resource, location, dateText,
+                        fileNodes);
+                        break;
                     default:
                         SetFileResourceNodes(propertyNodes, resource, location, dateText,
                         fileNodes);
@@ -108,6 +112,30 @@ namespace BtsMsiLib.ApplicationDefinitionFile
             }
 
             return resourceNodes;
+        }
+
+        private void SetBindingResourceNodes(List<PropertyNode> propertyNodes, Resource resource, string location, string dateText, List<FileNode> fileNodes)
+        {
+            propertyNodes.Add(new PropertyNode { Name = "SourceLocation", Value = Path.Combine(location, Path.GetFileName(resource.FilePath)) });
+            //propertyNodes.Add(new PropertyNode
+            //{
+            //    Name = "DestinationLocation",
+            //    Value = string.Concat(@"%BTAD_InstallDir%\", Path.GetFileName(resource.FilePath))
+            //});
+            propertyNodes.Add(new PropertyNode
+            {
+                Name = "TargetEnvironment",
+                // Use the last name element as environment
+                Value = Path.GetFileNameWithoutExtension(resource.FilePath).Split('.').Last<string>()
+            });
+            propertyNodes.Add(new PropertyNode { Name = "Attributes", Value = "Archive" });
+
+            propertyNodes.Add(new PropertyNode { Name = "CreationTime", Value = dateText });
+            propertyNodes.Add(new PropertyNode { Name = "LastAccessTime", Value = dateText });
+            propertyNodes.Add(new PropertyNode { Name = "LastWriteTime", Value = dateText });
+            propertyNodes.Add(new PropertyNode { Name = "ShortCabinetName", Value = resource.ShortCabinetName });
+
+            fileNodes.Add(new FileNode { Key = "BizTalkBinding", RelativePath = Path.GetFileName(resource.FilePath) });
         }
 
         private static void SetBtsAssemblyResourceNodes(List<PropertyNode> propertyNodes, Resource resource, string location,

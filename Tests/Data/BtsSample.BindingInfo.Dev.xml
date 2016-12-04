@@ -23,7 +23,7 @@
         <Primary>true</Primary>
         <OrderedDelivery>false</OrderedDelivery>
         <DeliveryNotification>1</DeliveryNotification>
-        <SendHandler Name="SendHost" HostTrusted="false">
+        <SendHandler Name="BizTalkServerApplication" HostTrusted="false">
           <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
         </SendHandler>
       </PrimaryTransport>
