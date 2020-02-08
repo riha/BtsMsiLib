@@ -8,6 +8,6 @@ namespace BtsMsiLib.Model
 {
     public enum MsiVersion
     {
-        BT2013,BT2013R2,BT2016
+        BT2013,BT2013R2,BT2016,BT2020
     }
 }

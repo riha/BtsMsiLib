@@ -41,7 +41,7 @@ namespace BtsMsiLib.IntegrationTests
         public void MinimalisticBindingsTest()
         {
             var btsApplication = new BtsApplication("BtsSample");
-            btsApplication.MsiVersion = BtsMsiLib.Model.MsiVersion.BT2013R2;
+            btsApplication.MsiVersion = BtsMsiLib.Model.MsiVersion.BT2020;
             var btsSchemaResource = new Resource(@"..\..\..\Data\BtsSample.Schemas.dll", ResourceType.BtsResource) { SourceLocation = @"c:\test1" };
             var btsBindingsResource = new Resource(@"..\..\..\Data\BtsSample.BindingInfo.Dev.xml", ResourceType.Binding) { SourceLocation = @"c:\test1" };
             var btsBindingsResource2 = new Resource(@"..\..\..\Data\BtsSample.BindingInfo.Test.xml", ResourceType.Binding) { SourceLocation = @"c:\test1" };
@@ -63,7 +63,7 @@ namespace BtsMsiLib.IntegrationTests
             btsApplication.Authors = "The Authors";
             btsApplication.Manufacturer = "BtsSample Ltd";
             btsApplication.ProductVersion = "2.5.2.1";
-            btsApplication.MsiVersion = BtsMsiLib.Model.MsiVersion.BT2016;
+            btsApplication.MsiVersion = BtsMsiLib.Model.MsiVersion.BT2020;
             var btsSchemaResource = new Resource(@"..\..\..\Data\BtsSample.Schemas.dll", ResourceType.BtsResource) { SourceLocation = @"c:\test1" };
             var btsBindingsResource = new Resource(@"..\..\..\Data\BtsSample.BindingInfo.Dev.xml", ResourceType.Binding) { SourceLocation = @"c:\test1" };
             var btsBindingsResource2 = new Resource(@"..\..\..\Data\BtsSample.BindingInfo.Test.xml", ResourceType.Binding) { SourceLocation = @"c:\test1" };
